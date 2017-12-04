@@ -33,8 +33,9 @@
     4a) Create the CMakeLists.txt file for your application. See this git
     repository for an example.
 
-    4b) Create a .ycm_extra_conf.py file for your application. See this git
-    repository for an example.
+    4b) Create a .ycm_extra_conf.py file for your application, if needed  Try
+    to use CMakeLists.txt, but put one of these in the source code directory if
+    needed. See this git repository for an example.
 
     Auto checking confirmation of this file being okay can be squelched by
     putting this in the .vimrc file:

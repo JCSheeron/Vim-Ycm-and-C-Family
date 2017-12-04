@@ -39,7 +39,7 @@ set ruler
 set laststatus=2 
 
 " last line
-" showmode is not needed with lightline
+" showmode i snot needed with lightline
 "set showmode
 set noshowmode
 set showcmd
@@ -57,7 +57,10 @@ set mouse=a
 " make a mark for column 80, but wrap after 79 columnns
 set colorcolumn=80
 set textwidth=79
+" set wrap on by default
 set wrap
+" turn off wrapping for python files
+au BufRead,BufNewFile *py,*pyw,*.txt set nowrap
 
 " by default, in insert mode backspace won't delete over line breaks, or 
 " automatically-inserted indentation, let's change that
@@ -89,7 +92,12 @@ set cursorline
 " remap the escape key to something easier to reach
 " there will be a slight pause after the first 'j' waiting for the next one
 " but this is visual, and should not cause a typing issue
-imap jj <Esc>
+" Go to normal (command) mode and eat up the moving back of the cursor.
+imap jj <Esc>l
+" Eat up the moving back of the cursor when going to normal (command) mode.
+" This is commented out, because it causes letters to be printed when the arrow
+" keys are pressed.
+"imap <Esc> <Esc>l
 
 " map <leader>O in normal modde to insert a line above without staying in insert mode
 " map <leader>o in normal mode to insert a line below without staying in insert mode
@@ -223,20 +231,34 @@ Plugin 'nvie/vim-flake8'
 
 " auto complete
 Plugin 'Valloric/YouCompleteMe'
-    let g:ycm_autoclose_preview_window_after_completion=1
-    map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    "let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-    let g:ycm_confirm_extra_conf=0
-    " let VIM and YouCompleteMe aware of virtualenv
-    "python with virtualenv support
-    "py << EOF
-    "import os
-    "import sys
-    "if 'VIRTUAL_ENV' in os.environ:
-    "  project_base_dir = os.environ['VIRTUAL_ENV']
-    "  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    "  execfile(activate_this, dict(__file__=activate_this))
-    "EOF
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_python_binary_path = '/usr/bin/python3'
+" as you type popup and sematic trigger (i.e. popup after typeing . or -> in
+" c++) popup. If off, you can force it with <C-Space>
+let g:ycm_auto_trigger = 1
+" to turn off just the identifier completer but keep the sematic tirggers
+" set the min number of chars for completion to a large number
+let g:ycm_min_num_of_chars_for_completion = 3
+" config handling of .ycm_extra_config.py files for c family
+" compilation/completion
+" Config a global version if wanted
+"let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+" Set to 1 if you want annoying confirmation of ycm file usagg
+let g:ycm_confirm_extra_conf=1
+
+" let VIM and YouCompleteMe aware of python virtualenv
+"python3 << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"    project_base_dir = os.environ['VIRTUAL_ENV']
+"    print(project_base_dir)
+"    activate_this = os.path.join(project_base_dir, '/bin/activate')
+"    print(activate_this)
+"    exec(open(activate_this).read())
+"EOF
 
 " nerdtree file tree
 Plugin 'scrooloose/nerdtree'
@@ -274,6 +296,7 @@ Plugin 'itchyny/lightline.vim'
     \ 'component_type': { 'syntastic': 'error' }
     \}
 
+Plugin 'kshenoy/vim-signature'
 "Plugin 'Lokaltog/vim-easymotion'    
 "Plugin 'tpope/vim-surround'         
 " -- Web Development

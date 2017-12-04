@@ -3,6 +3,9 @@ bin/
 build/
 CMakeFiles/
 
+# ignore *.orig files created by vim
+*.orig
+
 # Prerequisites
 *.d
 
