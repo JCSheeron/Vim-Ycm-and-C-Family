@@ -28,19 +28,14 @@
         cd ~/.vim/bundle/YouCompleteMe
         ./install.py --clang-completer
 
-4) Create your application -- initial steps that can be copied
+4) Create your application
 
-    4a) Create the CMakeLists.txt file for your application. See this git
-    repository for an example.
+    4a) Create the CMakeLists.txt file for you application. See this git
+    repository for an example
 
-    4b) Create a .ycm_extra_conf.py file for your application. See this git
-    repository for an example.
+    4b) Create a build directory
 
-    Auto checking confirmation of this file being okay can be squelched by
-    putting this in the .vimrc file:
-    let g:ycm_confirm_extra_conf=0
-
-    4c) Create a build directory
+    4c) Compile your application using CMake and Clang
 
     4d) Enable C-family Semantic Completion
 
@@ -102,7 +97,4 @@
         Option 2: Provide the flags manually
             See YCM documentation
 
-    5) Create your application
-
-    6) Compile your application using CMake and Clang
 
