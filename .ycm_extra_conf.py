@@ -53,7 +53,7 @@ flags = [
 # For a C project, you would set this to 'c' instead of 'c++'.
 '-x',
 'c++',
-'-std=c++11',
+'-std=c++14',
 '-isystem',
 '../BoostParts',
 '-isystem',
